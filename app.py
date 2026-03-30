@@ -4,7 +4,7 @@ import os
 from crewai import Agent, Task, Crew, LLM
 from litellm import RateLimitError
 
-os.environ["GROQ_API_KEY"] = "your_real_groq_key"
+os.environ["GROQ_API_KEY"] = "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"
 
 llm = LLM(model="groq/llama-3.1-8b-instant", temperature=0.4, max_tokens=500)
 app = FastAPI()
