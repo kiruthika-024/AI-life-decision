@@ -1,0 +1,6 @@
+crewai
+litellm
+langchain-groq
+streamlit     
+fastapi       
+uvicorn       
