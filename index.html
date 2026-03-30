@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Life Decision Tool</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background-color: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 400px;
+    }
+    h1 {
+      text-align: center;
+      color: #111827;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #d1d5db;
+      font-size: 16px;
+    }
+    button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1e40af;
+    }
+    pre {
+      background-color: #f9fafb;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Life Decision Tool</h1>
+    
+    <label>Decision:</label>
+    <input type="text" id="decision" placeholder="Enter your decision">
+
+    <label>Monthly Income (₹):</label>
+    <input type="number" id="income" placeholder="45000">
+
+    <label>Total Savings (₹):</label>
+    <input type="number" id="savings" placeholder="200000">
+
+    <label>Dependents:</label>
+    <input type="number" id="dependents" placeholder="2">
+
+    <button onclick="submitData()">Get Recommendation</button>
+
+    <h3>Output:</h3>
+    <pre id="output">Your recommendation will appear here...</pre>
+  </div>
+
+  <script>
+    async function submitData() {
+      const decision = document.getElementById("decision").value;
+      const income = document.getElementById("income").value;
+      const savings = document.getElementById("savings").value;
+      const dependents = document.getElementById("dependents").value;
+
+      const responseBox = document.getElementById("output");
+      responseBox.textContent = "Processing...";
+
+      try {
+        const response = await fetch("http://localhost:8000/ai-decision", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ decision, income, savings, dependents })
+        });
+
+        if (!response.ok) {
+          throw new Error("Server error: " + response.statusText);
+        }
+
+        const data = await response.json();
+        responseBox.textContent = JSON.stringify(data, null, 2);
+      } catch (error) {
+        responseBox.textContent = "Error: " + error.message;
+      }
+    }
+  </script>
+</body>
+</html>
