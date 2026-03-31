@@ -12,7 +12,7 @@ pip install crewai langchain-groq langchain-community
 from crewai import Agent
 
 import os
-os.environ["GROQ_API_KEY"]="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"
+os.environ["GROQ_API_KEY"]="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"
 
 pip install litellm
 
