@@ -19,7 +19,7 @@ pip install litellm
 import os
 from crewai import Agent, Task, Crew, LLM
 from litellm import RateLimitError
-os.environ["GROQ_API_KEY"] = "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"  
+os.environ["GROQ_API_KEY"] = "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"  
 llm = LLM(
     model="groq/llama-3.1-8b-instant",
     temperature=0.4,
